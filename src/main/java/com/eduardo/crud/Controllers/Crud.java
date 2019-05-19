@@ -32,8 +32,8 @@ public class Crud {
 
     @RequestMapping(value = "/crud/update/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@RequestBody Client client, @PathVariable("id") int id) throws Exception{
-        service.update(client, id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Client cli = service.update(client, id);
+        return new ResponseEntity<>(cli, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/crud/list", method = RequestMethod.GET)
@@ -44,8 +44,8 @@ public class Crud {
 
     @RequestMapping(value = "/crud/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable("id") int id) throws Exception {
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Client cli = service.delete(id);
+        return new ResponseEntity<>(cli, HttpStatus.OK);
     }
 
 

@@ -1,5 +1,6 @@
 package com.eduardo.crud.Service;
 
+
 import com.eduardo.crud.Model.Client;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -40,33 +41,33 @@ public class ClientService {
         return list;
     }
 
-    public void delete(int id) throws Exception{
-        List<Client> clients = this.getClients();
-        for(Client c : clients){
+    public Client delete(int id) throws Exception{
+        for(Client c : this.list){
             if(c.getId() == id){
-                clients.remove(c);
+                this.list.remove(c);
+                return c;
             }else{
                 throw new Exception("Client doesn't exist");
             }
         }
+        return null;
     }
 
 
-    //Consertar!!-->
-    public void update(Client client, int id) throws Exception {
+
+    public Client update(Client client, int id) throws Exception {
         List<Client> clients = this.getClients();
         ModelMapper mp = new ModelMapper();
         for(Client c : clients){
-                if(c.getId() == id){
-                    client.setId(id);
-                    mp.map(client,c);
-                    break;
-                }
+            if(c.getId() == id){
+                client.setId(id);
+                mp.map(client,c);
+                return c;
+            }
         }
         throw new Exception("ID doesn't found");
     }
 
-    //<--essa parte
 
     public String getName() {
         return name;
